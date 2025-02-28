@@ -2,7 +2,7 @@ package com.example.lab02.phan3;
 
 import java.util.Scanner;
 
-public class Person {
+public class b1_Person {
     private String name;
     private String address;
     private double salary;
@@ -22,7 +22,7 @@ public class Person {
         System.out.println("Lương: " + salary);
     }
     public static void main(String[] args) {
-        Person p = new Person();
+        b1_Person p = new b1_Person();
         p.input();
         p.view();
     }

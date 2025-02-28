@@ -2,7 +2,7 @@ package com.example.lab02.phan3;
 
 import java.util.Scanner;
 
-public class XeMay {
+public class b2_XeMay {
     String ten;
     String nhaSanXuat;
     int soLuongXe;
@@ -23,7 +23,7 @@ public class XeMay {
     }
 
     public static void main(String[] args) {
-        XeMay xeMay = new XeMay();
+        b2_XeMay xeMay = new b2_XeMay();
         xeMay.nhapThongTin();
         xeMay.hienthiThongTin();
     }

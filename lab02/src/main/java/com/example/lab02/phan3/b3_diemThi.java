@@ -2,7 +2,7 @@ package com.example.lab02.phan3;
 
 import java.util.Scanner;
 
-public class diemThi {
+public class b3_diemThi {
     String ten;
     float diemLT;
     float diemTH;
@@ -39,7 +39,7 @@ public class diemThi {
         }
     }
     public static void main(String[] args) {
-        diemThi d = new diemThi();
+        b3_diemThi d = new b3_diemThi();
         d.nhapDiemThi();
         d.ketQuaThi();
     }

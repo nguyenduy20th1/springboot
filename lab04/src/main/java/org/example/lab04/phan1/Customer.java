@@ -59,7 +59,7 @@ class CustomerManager {
     }
 }
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Customer cust_1 = new Customer();
         Customer cust_2 = new Customer();

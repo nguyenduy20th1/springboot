@@ -2,7 +2,7 @@ package com.example.lab02.phan3;
 
 import java.util.Scanner;
 
-public class b5ChanLe {
+public class b5_chanLe {
     int n;
     public void nhapSo() {
         Scanner sc = new Scanner(System.in);
@@ -18,7 +18,7 @@ public class b5ChanLe {
         }
     }
     public static void main(String[] args) {
-        b5ChanLe obj = new b5ChanLe ();
+        b5_chanLe obj = new b5_chanLe();
         obj.nhapSo();
         obj.ketQuaThi();
     }

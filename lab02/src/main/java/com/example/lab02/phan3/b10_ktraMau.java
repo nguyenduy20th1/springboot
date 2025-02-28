@@ -2,7 +2,7 @@ package com.example.lab02.phan3;
 
 import java.util.Scanner;
 
-public class b9_ktraMau {
+public class b10_ktraMau {
     public static void main(String[] args) {
         char color;
         Scanner sc = new Scanner(System.in);
