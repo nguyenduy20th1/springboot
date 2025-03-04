@@ -10,12 +10,14 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Getter
+@Setter
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MonHoc {
     @Id
-    String mamk;
-    String tenmk;
+    String mamh;
+    String tenmh;
     int sotiet;
 
 }
