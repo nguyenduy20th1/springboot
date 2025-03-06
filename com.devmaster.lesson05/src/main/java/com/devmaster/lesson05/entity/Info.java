@@ -9,10 +9,8 @@ import lombok.*;
 @Builder
 @Data
 public class Info {
-
     private String name;
     private String nickname;
     private String email;
     private String website;
-
 }

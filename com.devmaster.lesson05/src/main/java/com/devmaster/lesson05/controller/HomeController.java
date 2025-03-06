@@ -14,7 +14,7 @@ import java.util.List;
 public class HomeController {
     @GetMapping
     public String index() {
-        return "Hello World";
+        return "index";
     }
     @GetMapping("/profile")
     public String profile(Model model) {

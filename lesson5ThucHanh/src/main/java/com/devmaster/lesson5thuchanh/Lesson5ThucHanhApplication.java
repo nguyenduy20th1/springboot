@@ -1,13 +1,13 @@
-package com.devmaster.lesson05;
+package com.devmaster.lesson5thuchanh;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class Lesson5ThucHanhApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-        System.out.println("Wellcome to Thymeleaf");
+        SpringApplication.run(Lesson5ThucHanhApplication.class, args);
     }
+
 }
