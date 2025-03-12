@@ -1,16 +1,16 @@
-package com.devmaster.labguide05.entity;
+package com.devmaster.labguide.dto;
 
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Getter
 @Setter
-@Builder
-
-public class User {
+public class StudentDTO {
     private Long id;
     private String name;
-    private String address;
+    private String email;
+    private int age;
 }
