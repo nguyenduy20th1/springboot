@@ -13,6 +13,10 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
+    private static final String UPLOAD_DIR = "src/main/resources/static/";
+
+    private static final String UPLOAD_PartFile = "images/authors/";
+
     @GetMapping
     public String getAllAuthors(Model model) {
         model.addAttribute("authors", authorService.getAllAuthors());

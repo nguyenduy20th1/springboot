@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -45,51 +44,52 @@ public class BookController {
         return "books/book-form";
     }
     @PostMapping("/new")
-    public String saveBook(@ModelAttribute Book book, @RequestParam List<Long> authorIds,@RequestParam("imageBook") MultipartFile imageFile) {
+    public String saveBook(@RequestParam("authorIds") List<Long> authorIds,
+                           @RequestParam(value = "chiefEditorId", required = false) Long chiefEditorId,
+                           @ModelAttribute Book book,
+                           @RequestParam("imageBook") MultipartFile imageFile) {
         if (!imageFile.isEmpty()) {
             try {
-                //tao thu muc neu chua ton tai
                 Path uploadPath = Paths.get(UPLOAD_DIR + UPLOAD_PartFile);
                 if (!Files.exists(uploadPath)) {
                     Files.createDirectories(uploadPath);
                 }
-                //lay phan mo rong cua file anh
+
                 String originalFileName = StringUtils.cleanPath(imageFile.getOriginalFilename());
                 String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-
-                //luu file len server
-                //String originalFileName = StringUtils.cleanPath(imageFile.getOriginalFilename());
-                //Part filePart = uploadPath.resolve(fileName);
-
-                //tao ten file moi + phan mo rong goc
                 String newFileName = book.getCode() + fileExtension;
                 Path filePath = uploadPath.resolve(newFileName);
-                Files.copy(imageFile.getInputStream(), filePath);
 
-                //luu duong dan anh vao thuoc tinh imgUrl cua Book
+                int counter = 1;
+                while (Files.exists(filePath)) {
+                    newFileName = book.getCode() + "_" + counter + fileExtension;
+                    filePath = uploadPath.resolve(newFileName);
+                    counter++;
+                }
+
+                Files.copy(imageFile.getInputStream(), filePath);
                 book.setImgUrl("/" + UPLOAD_PartFile + newFileName);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        List<Author> authors = new ArrayList<>(authorService.findAllById(authorIds));
-        book.setAuthors(authors);
-        bookService.saveBook(book);
+        bookService.saveBook(book, authorIds, chiefEditorId);
+
         return "redirect:/books";
     }
 
-    //form sua thong tin book
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         Book book = bookService.getBookById(id);
+
         model.addAttribute("book", book);
         model.addAttribute("authors", authorService.getAllAuthors());
+        model.addAttribute("bookAuthors", book.getBookAuthors());
         return "books/book-form";
     }
     @GetMapping("/delete/{id}")
-    public String deleteBook(@PathVariable Long id) {
-        bookService.deleteBookById(id);
+    public String deleteBook(@PathVariable("id") Long bookId) {
+        bookService.deleteBook(bookId);
         return "redirect:/books";
     }
 }

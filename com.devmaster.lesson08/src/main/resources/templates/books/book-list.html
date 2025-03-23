@@ -27,7 +27,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="book : ${books}">
+        <tr th:each="book : ${books} ">
             <td th:text="${book.id}"></td>
             <td th:text="${book.code}"></td>
             <td th:text="${book.name}"></td>
@@ -40,9 +40,11 @@
             <td th:text="${book.quantity}"></td>
             <td th:text="${book.price}"></td>
             <td>
-                <span th:each="author : ${book.authors}" class="mx-1 badge rounded-pill bg-warning text-dark"
-                      th:text="${author.getName()}"></span>
+                <span th:each="bookAuthor : ${book.bookAuthors}"
+                      class="mx-1 badge rounded-pill bg-warning text-dark"
+                      th:text="${bookAuthor.author.name}"></span>
             </td>
+
             <td>
                 <a th:href="@{/books/edit/{id}(id=${book.id})}" class="btn btn-sm btn-warning">Sửa</a>
                 <a th:href="@{/books/delete/{id}(id=${book.id})}" class="btn btn-sm btn-danger"

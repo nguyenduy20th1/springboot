@@ -26,7 +26,7 @@ public class Author {
     private String address;
     private Boolean isActive;
 
-    //tạo mối quan hệ với bảng book
-    @ManyToMany(mappedBy = "authors")
-    private List<Book> books = new ArrayList<>();
+    //tạo mối quan hệ với bảng bookau
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BookAuthor> bookAuthors = new ArrayList<>();
 }

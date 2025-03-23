@@ -69,15 +69,19 @@
                     </div>
                 </div>
 
-                <div class="mb-3 row">
+                <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Authors:</label>
-                    <div class="col-sm-10 d-flex">
-                        <div th:each="author : ${authors}" class="mx-2 px-2">
-                            <input type="checkbox" name="authorIds"
-                                   th:attr="id='chkAuth_' + ${author.id}"
-                                   th:value="${author.id}"
-                                   th:checked="${book.authors.contains(author)}">
-                            <label th:text="${author.name}" th:attr="for='chkAuth_' + ${author.id}">Author Name</label>
+                    <div class="col-sm-10">
+                        <div th:each="author : ${authors}" class="d-flex align-items-center mb-2">
+                            <input type="checkbox" class="author-checkbox me-2" name="authorIds"
+                                   th:value="${author.id}" th:attr="id='chkAuth_'+${author.id}"
+                                   onchange="updateEditorSelection()">
+                            <label th:text="${author.name}" th:attr="for='chkAuth_'+${author.id}">Author Name</label>
+
+                            <input type="radio" class="editor-radio ms-3" name="editorId"
+                                   th:value="${author.id}" th:attr="id='editor_'+${author.id}"
+                                   disabled>
+                            <label th:attr="for='editor_'+${author.id}">Chủ biên</label>
                         </div>
                     </div>
                 </div>
@@ -99,5 +103,40 @@
         </div>
     </form>
 </section>
+<script>
+    function updateEditorSelection() {
+        // Lấy danh sách tất cả các checkbox tác giả
+        const authorCheckboxes = document.querySelectorAll('.author-checkbox');
+        // Lấy danh sách tất cả các radio button "Chủ biên"
+        const editorRadios = document.querySelectorAll('.editor-radio');
+
+        authorCheckboxes.forEach(checkbox => {
+            const authorId = checkbox.value;
+            const editorRadio = document.getElementById('editor_' + authorId);
+
+            // Nếu checkbox được chọn, bật radio button tương ứng
+            if (checkbox.checked) {
+                editorRadio.disabled = false;
+            } else {
+                editorRadio.disabled = true;
+                editorRadio.checked = false; // Bỏ chọn nếu checkbox bị tắt
+            }
+        });
+    }
+
+    // Đảm bảo radio chỉ cho phép chọn một tác giả làm chủ biên
+    document.addEventListener("DOMContentLoaded", function() {
+        const editorRadios = document.querySelectorAll('.editor-radio');
+
+        editorRadios.forEach(radio => {
+            radio.addEventListener("change", function() {
+                editorRadios.forEach(r => {
+                    if (r !== this) r.checked = false; // Bỏ chọn các radio khác
+                });
+            });
+        });
+    });
+</script>
+
 </body>
 </html>
