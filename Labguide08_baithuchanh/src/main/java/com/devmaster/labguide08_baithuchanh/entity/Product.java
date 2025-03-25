@@ -23,13 +23,6 @@ public class Product {
     private String price;
     private Boolean isActive;
 
-//    @ManyToMany
-//    @JoinTable(
-//        name = "Product_Config",
-//        joinColumns = @JoinColumn(name = "productId"),
-//        inverseJoinColumns =@JoinColumn(name = "configId")
-//    )
-
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Product_Config> product_configs;
 }
